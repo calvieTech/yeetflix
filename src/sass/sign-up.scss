@@ -1,0 +1,32 @@
+.signUp__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #28353b;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  .signUp__logo {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signUp__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signUp__copyright {
+    color: white;
+  }
+
+  .signUp__signin {
+    text-decoration: none;
+  }
+}

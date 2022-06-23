@@ -1,0 +1,9 @@
+$foreground: "#28353B";
+$background: "#FFFFFF";
+$icon: "#FE6152";
+
+:export {
+  $black: $foreground;
+  $red: $icon;
+  $white: $background;
+}
