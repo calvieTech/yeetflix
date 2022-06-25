@@ -1,59 +1,85 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
-// import axios from "axios";
-import { TMDB_API_KEY } from "../request";
 import "../sass/row.scss";
 import { trackPromise } from "react-promise-tracker";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
-function Row({ title, fetchUrl, isLargeRow }) {
+function Row({ title, isLargeRow, fetchUrl }) {
   const [movies, setMovies] = useState([]);
-  let image_baseURL = `https://image.tmdb.org/t/p/original`;
+  const [trailerURL, setTrailerURL] = useState("");
+  let baseURL = `https://image.tmdb.org/t/p/original/`;
 
-  const filterMovie = (item) => {
-    if (
-      item !== null ||
-      item !== undefined ||
-      item.backdrop_path !== null ||
-      item.backdrop_path !== undefined ||
-      item.poster_path !== null ||
-      item.poster_path !== undefined
-    ) {
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerURL) {
+      setTrailerURL("");
+    } else {
+      movieTrailer(`${movie.name}`, {
+        tmdbId: `${movie.id}`,
+        year: `${movie.year}`,
+      })
+        .then((url) => {
+          let urlForTrailer = new URL(url).search;
+          let urlParams = new URLSearchParams(urlForTrailer);
+          let v = urlParams.get("v");
+          setTrailerURL(v);
+          return v;
+        })
+        .catch((err) => console.log(`Error has occurred: ` + err));
+    }
+  };
+
+  const isNotNull = (item) => {
+    if (item || item.name || item.backdrop_path || item.poster_path) {
       return true;
     }
     return false;
   };
 
-  async function fetchData() {
-    const req = await axios.get(fetchUrl).then((response) => {
-      let moviesResults = response.data.results;
-      let filteredMovies = moviesResults.filter(filterMovie);
-      setMovies(filteredMovies);
-      return filteredMovies;
-    });
-    return req;
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      let req = await axios.get(fetchUrl).then((response) => {
+        let moviesResults = response.data.results;
+        let filteredMovies = moviesResults.filter(isNotNull);
+        setMovies(filteredMovies);
+        return filteredMovies;
+      });
+      return req;
+    }
     trackPromise(fetchData());
   }, [fetchUrl]);
 
   return (
     <div className="row">
-      <h2>{title}</h2>
+      <h1 className={`row__title ${isLargeRow && "row__titleLarge"}`}>
+        {title}
+      </h1>
       <div className="row__posters">
         {movies.map((movie) => {
-          let baseURL = `https://image.tmdb.org/t/p/original/`;
           let newURL = `${baseURL}${movie.poster_path}`;
           let altURL = `${baseURL}${movie.backdrop_path}`;
           return (
             <img
-              key={movie.id}
+              key={movie?.id}
+              id={movie.id}
+              onClick={() => handleClick(movie)}
               className={`row__poster ${isLargeRow && "row__posterLarge"}`}
               src={isLargeRow ? `${newURL}` : `${altURL}`}
               alt={movie.name}
             />
           );
         })}
+      </div>
+      <div className="row__trailer">
+        {trailerURL ? <YouTube videoId={trailerURL} opts={opts} /> : ""}
       </div>
     </div>
   );

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import LoadingIndicator from "./LoadingIndicator";
 import Row from "./Row";
+import Footer from "./Footer";
+import Banner from "../components/Banner";
 
 function Home({ requests }) {
   return (
     <div>
+      <Banner requests={requests} fetchUrl={requests.fetchNetflixOriginals} />
       <Row
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
@@ -16,7 +19,8 @@ function Home({ requests }) {
       <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
       <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
       <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />{" "}
+      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
+      <Footer />
     </div>
   );
 }

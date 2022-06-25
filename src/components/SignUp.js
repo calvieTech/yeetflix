@@ -1,4 +1,5 @@
-import * as React from "react";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,9 +10,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../sass/sign-up.scss";
 import image from "../media/yeetflex-nobackground.png";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { authMe } from "../firebase";
+import { useStateValue } from "../StateProvider";
 
 function Copyright(props) {
   return (
@@ -32,9 +38,12 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
-
 export default function SignUp() {
+  const navigate = useNavigate();
+  // const [{ basket, user }, dispatch] = useStateValue();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,6 +51,30 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     });
+  };
+
+  const signIn = (e) => {
+    e.preventDefault();
+
+    signInWithEmailAndPassword(authMe, email, password)
+      .then((auth) => {
+        if (auth) {
+          navigate("/");
+        }
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const register = (e) => {
+    e.preventDefault();
+
+    createUserWithEmailAndPassword(authMe, email, password)
+      .then((auth) => {
+        if (auth) {
+          navigate("/");
+        }
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -156,7 +189,7 @@ export default function SignUp() {
                   }}
                 >
                   <p className="signUp__signin">
-                    Already have an account? Sign in
+                    Already have an account? Sign in!
                   </p>
                 </Link>
               </Grid>

@@ -1,62 +1,72 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import { trackPromise } from "react-promise-tracker";
+import "../sass/banner.scss";
 
-function Banner({ fetchUrl }) {
+function Banner({ fetchUrl, requests }) {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const filterMovie = (item) => {
-    if (
-      item !== null ||
-      item !== undefined ||
-      item.backdrop_path !== null ||
-      item.backdrop_path !== undefined ||
-      item.poster_path !== null ||
-      item.poster_path !== undefined
-    ) {
+  const isNotNull = (item) => {
+    if (item || item.name || item.backdrop_path || item.poster_path) {
       return true;
     }
     return false;
   };
 
-  async function fetchData() {
-    const request = await axios.get(fetchUrl).then((res) => {
-      setLoading(true);
-      let data = res.data.results;
-      let filteredData = data.filter(filterMovie);
-      setMovie(filteredData);
-      return filteredData;
-    });
-    setLoading(false);
-    return request;
-  }
+  let truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
 
   useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(fetchUrl).then((res) => {
+        setLoading(true);
+        let data = res.data.results;
+        let filteredData = data.filter(isNotNull);
+        let specificFilteredData =
+          filteredData[Math.floor(Math.random() * filteredData.length)];
+        setMovie(specificFilteredData);
+        return specificFilteredData;
+      });
+      setLoading(false);
+      return request;
+    }
     trackPromise(fetchData());
   }, [fetchUrl]);
 
   return (
-    <div
-      className="banner"
-      style={{
-        backgroundSize: "cover",
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
-        backgroundPosition: "center center",
-      }}
-    >
-      {/* <div className="banner__logo">
-        <img src="./media/yeetflex-nobackground.png" alt="banner" />
-      </div> */}
-      <div className="banner__contents">
-        <h1>{movie?.title || movie?.name || movie?.original_name}</h1>
+    <div>
+      {loading ? (
+        " "
+      ) : (
+        <header
+          className="banner"
+          style={{
+            backgroundSize: "cover",
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.backdrop_path})`,
+            backgroundPosition: "center center",
+          }}
+        >
+          <div className="banner__contents">
+            <h1 className="banner__title">
+              {movie?.title || movie?.name || movie?.original_name}
+            </h1>
 
-        <div className="banner__buttons">
-          <button className="banner__button">Play Now</button>
-          <button className="banner__button">My List</button>
-        </div>
-        <h1 className="banner__description">${movie?.overview}</h1>
-      </div>
+            <div className="banner__buttons">
+              <button className="banner__button">Play Now</button>
+              <button className="banner__button">My List</button>
+            </div>
+            <h1 className="banner__description">
+              {truncate(movie?.overview, 200)}
+            </h1>
+          </div>
+          <div className="banner--fadeBottom" />
+          <div className="banner__divider">
+            <hr />
+          </div>
+        </header>
+      )}
     </div>
   );
 }

@@ -1,22 +1,25 @@
 .row {
+  color: #ffffff;
   margin-left: 20px;
+
+  .row__title {
+    text-align: left;
+    padding: 5px;
+  }
+
+  .row__titleLarge {
+    margin-top: 20px;
+  }
+
   .row__posters {
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 20px;
+    cursor: pointer;
 
     &::-webkit-scrollbar {
       display: none;
-    }
-
-    .row__posterLarge {
-      max-height: 250px;
-
-      &:hover {
-        transform: scale(1.09);
-        opacity: 1;
-      }
     }
 
     .row__poster {
@@ -24,11 +27,22 @@
       width: 100%;
       max-height: 150px;
       margin-right: 10px;
+      margin-left: 5px;
       transition: transform 450ms;
 
       &:hover {
+        border: 2px solid #fe6152;
         transform: scale(1.08);
-        // opacity: 1;
+        opacity: 1;
+      }
+    }
+    .row__posterLarge {
+      object-fit: contain;
+      max-height: 250px;
+
+      &:hover {
+        transform: scale(1.09);
+        opacity: 1;
       }
     }
   }
