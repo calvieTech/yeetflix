@@ -1,30 +1,46 @@
 import React from "react";
 import "../sass/footer.scss";
 import tmdb from "../media/tmdb-short.svg";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://cthang94.github.io/">
+        CalvieTech
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."} <br />
+      All Rights Reserved.
+    </Typography>
+  );
+}
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer__copyright">
+        <Copyright sx={{ color: "white", fontSize: "16px" }} />
         <p>
-          &copy; 2021-2022{" "}
-          <span style={{ color: "#FE6152" }}>Calvie Tech Inc.</span> All Rights
-          Reserved.
-        </p>
-
-        <div className="footer__tmdb">
-          Made with:{" "}
+          Made with: TMDB API{" "}
           <a
             className="footer__tmdbLink"
             href="https://www.themoviedb.org/?language=en-US"
             rel="noopener"
             style={{ textDecoration: "none", color: "white" }}
           >
-            TMDB API <img src={tmdb} height={20} />
+            <img src={tmdb} height={20} alt="tmdb logo" />
           </a>
-        </div>
+        </p>
       </div>
-    </div>
+    </footer>
   );
 }
 

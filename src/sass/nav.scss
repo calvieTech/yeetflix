@@ -5,27 +5,19 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 24px;
   height: 40px;
-  align-items: center;
   transition-timing-function: ease-in;
-  transition: all 0.2s;
+  transition: all 0.3s;
   // background-color: #111;
 
   .nav__logo {
-    left: 20px;
+    display: flex;
+    left: 24px;
     position: fixed;
-    width: 150px;
     object-fit: contain;
     cursor: pointer;
-  }
-
-  .nav__avatar {
-    cursor: pointer;
-    position: fixed;
-    right: 20px;
-    width: 40px;
-    object-fit: contain;
+    align-items: center;
   }
 }
 

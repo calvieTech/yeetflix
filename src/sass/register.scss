@@ -1,0 +1,32 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #28353b;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  .register__container {
+    .register__logo {
+      margin-bottom: 50px;
+    }
+
+    .register__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .register__copyright {
+      color: white;
+    }
+
+    .register__signin {
+      text-decoration: none;
+    }
+  }
+}

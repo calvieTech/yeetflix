@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import image from "../media/yeetflex-nobackground.png";
-import Avatar from "@mui/material/Avatar";
 import "../sass/nav.scss";
+import { Link } from "react-router-dom";
+import Dashboard from "./Dashboard";
+import MainMenu from "./MainMenu";
 
 function Nav() {
   const [show, handleShow] = useState(false);
@@ -19,19 +21,19 @@ function Nav() {
     };
   }, []);
   return (
-    <div className={`nav ${show && "nav__black"}`}>
-      <img
-        className="nav__logo"
-        src={image}
-        alt="yeetflex logo"
-        width={150}
-        height={40}
-      ></img>
-      <Avatar
-        className="nav__avatar"
-        sx={{ color: "#FE6152", bgcolor: "#FFFFFF", cursor: "pointer" }}
-      />
-    </div>
+    <nav className={`nav ${show && "nav__black"}`}>
+      <Link to="/home">
+        <img
+          className="nav__logo"
+          src={image}
+          alt="yeetflex logo"
+          width={240}
+          height={40}
+        />
+      </Link>
+      {/* <MainMenu className="nav__dashboard" /> */}
+      <Dashboard className="nav__dashboard" />
+    </nav>
   );
 }
 

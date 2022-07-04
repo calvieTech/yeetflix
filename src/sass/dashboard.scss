@@ -1,0 +1,64 @@
+@use "index.scss" as root;
+
+.dashboard {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .dashboard__icon {
+    object-fit: contain;
+    position: fixed;
+    right: 24px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border: none;
+    vertical-align: middle;
+    background-color: #ffffff;
+    transition: background-color 0.2ms ease-in, color 0.2ms ease-in;
+    color: black;
+
+    &.open {
+      background-color: #fe6152;
+      color: white;
+      transition: background-color 0.2ms ease-in-out, color 0.2ms ease-in-out;
+    }
+  }
+
+  .dashboard__menu {
+    display: none;
+    list-style: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(180px);
+    right: 40px;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    position: relative;
+
+    &.active {
+      visibility: visible;
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+    }
+
+    .dashboard__menuItem {
+      background-color: lightblue;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      a {
+        padding: 24px 16px;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: antiquewhite;
+      }
+    }
+  }
+}

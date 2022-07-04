@@ -1,0 +1,24 @@
+.login {
+  background-color: #28353b;
+  text-align: center;
+
+  .login__container {
+    .login__logo {
+      margin-bottom: 50px;
+    }
+
+    .login__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login__copyright {
+      color: white;
+    }
+
+    .login__login {
+      text-decoration: none;
+    }
+  }
+}

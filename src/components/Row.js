@@ -4,14 +4,19 @@ import "../sass/row.scss";
 import { trackPromise } from "react-promise-tracker";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import Movie from "./Movie";
 
 function Row({ title, isLargeRow, fetchUrl }) {
   const [movies, setMovies] = useState([]);
-  const [trailerURL, setTrailerURL] = useState("");
+  // const [trailerURL, setTrailerURL] = useState("");
+  const [currentMovie, setCurrentMovie] = useState(null);
   let baseURL = `https://image.tmdb.org/t/p/original/`;
 
+  const removeCurrentMovie = () => {
+    setCurrentMovie(null);
+  };
   const opts = {
-    height: "390",
+    height: "400",
     width: "100%",
     playerVars: {
       autoplay: 1,
@@ -19,23 +24,30 @@ function Row({ title, isLargeRow, fetchUrl }) {
   };
 
   const handleClick = (movie) => {
-    if (trailerURL) {
-      setTrailerURL("");
-    } else {
-      movieTrailer(`${movie.name}`, {
-        tmdbId: `${movie.id}`,
-        year: `${movie.year}`,
-      })
-        .then((url) => {
-          let urlForTrailer = new URL(url).search;
-          let urlParams = new URLSearchParams(urlForTrailer);
-          let v = urlParams.get("v");
-          setTrailerURL(v);
-          return v;
-        })
-        .catch((err) => console.log(`Error has occurred: ` + err));
-    }
+    setCurrentMovie(movie);
   };
+
+  /*
+   * Fetches youtube trailer video
+   */
+  // const handleClick = (movie) => {
+  //   if (trailerURL) {
+  //     setTrailerURL("");
+  //   } else {
+  //     movieTrailer(`${movie.name}`, {
+  //       tmdbId: `${movie.id}`,
+  //       year: `${movie.year}`,
+  //     })
+  //       .then((url) => {
+  //         let urlForTrailer = new URL(url).search;
+  //         let urlParams = new URLSearchParams(urlForTrailer);
+  //         let v = urlParams.get("v");
+  //         setTrailerURL(v);
+  //         return v;
+  //       })
+  //       .catch((err) => console.log(`Error has occurred: ` + err));
+  //   }
+  // };
 
   const isNotNull = (item) => {
     if (item || item.name || item.backdrop_path || item.poster_path) {
@@ -59,9 +71,9 @@ function Row({ title, isLargeRow, fetchUrl }) {
 
   return (
     <div className="row">
-      <h1 className={`row__title ${isLargeRow && "row__titleLarge"}`}>
+      <h2 className={`row__title ${isLargeRow && "row__titleLarge"}`}>
         {title}
-      </h1>
+      </h2>
       <div className="row__posters">
         {movies.map((movie) => {
           let newURL = `${baseURL}${movie.poster_path}`;
@@ -79,7 +91,13 @@ function Row({ title, isLargeRow, fetchUrl }) {
         })}
       </div>
       <div className="row__trailer">
-        {trailerURL ? <YouTube videoId={trailerURL} opts={opts} /> : ""}
+        {/* {trailerURL ? <YouTube videoId={trailerURL} opts={opts} /> : ""} */}
+        {/* {open ? <Movie movie={currentMovie} /> : ""} */}
+        {currentMovie !== null ? (
+          <Movie movie={currentMovie} removeCurrentMovie={removeCurrentMovie} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

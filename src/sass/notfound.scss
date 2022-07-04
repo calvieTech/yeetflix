@@ -1,0 +1,23 @@
+.notfound {
+  background-color: #28353b;
+  width: 100vw;
+  height: 100vh;
+
+  .notfound__error {
+    color: white;
+
+    .notfound__title {
+      display: block;
+      font-size: 60px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .notfound__desc {
+      display: block;
+    }
+  }
+}

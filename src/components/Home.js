@@ -3,10 +3,10 @@ import LoadingIndicator from "./LoadingIndicator";
 import Row from "./Row";
 import Footer from "./Footer";
 import Banner from "../components/Banner";
-
+import "../sass/home.scss";
 function Home({ requests }) {
   return (
-    <div>
+    <main className="home">
       <Banner requests={requests} fetchUrl={requests.fetchNetflixOriginals} />
       <Row
         title="NETFLIX ORIGINALS"
@@ -20,8 +20,7 @@ function Home({ requests }) {
       <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
       <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
       <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
-      <Footer />
-    </div>
+    </main>
   );
 }
 

@@ -36,11 +36,11 @@ function Banner({ fetchUrl, requests }) {
   }, [fetchUrl]);
 
   return (
-    <div>
+    <header>
       {loading ? (
         " "
       ) : (
-        <header
+        <div
           className="banner"
           style={{
             backgroundSize: "cover",
@@ -57,17 +57,17 @@ function Banner({ fetchUrl, requests }) {
               <button className="banner__button">Play Now</button>
               <button className="banner__button">My List</button>
             </div>
-            <h1 className="banner__description">
+            <p className="banner__description">
               {truncate(movie?.overview, 200)}
-            </h1>
+            </p>
           </div>
           <div className="banner--fadeBottom" />
           <div className="banner__divider">
             <hr />
           </div>
-        </header>
+        </div>
       )}
-    </div>
+    </header>
   );
 }
 

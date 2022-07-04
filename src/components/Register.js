@@ -10,14 +10,13 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import "../sass/sign-up.scss";
+import "../sass/register.scss";
 import image from "../media/yeetflex-nobackground.png";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { authMe } from "../firebase";
-import { useStateValue } from "../StateProvider";
 
 function Copyright(props) {
   return (
@@ -38,7 +37,7 @@ function Copyright(props) {
   );
 }
 
-export default function SignUp() {
+export default function Register() {
   const navigate = useNavigate();
   // const [{ basket, user }, dispatch] = useStateValue();
   const [email, setEmail] = useState("");
@@ -78,15 +77,17 @@ export default function SignUp() {
   };
 
   return (
-    <div className="signUp__container">
+    <div className="register">
       {/* <ThemeProvider theme={theme}> */}
       <Container
+        className="register__container"
         component="main"
-        maxWidth="xs"
+        maxWidth="xl"
         sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
           color: "white",
         }}
@@ -94,7 +95,7 @@ export default function SignUp() {
         <CssBaseline />
         <Box>
           <img
-            className="signUp__logo"
+            className="register__logo"
             src={image}
             alt={`yeetflex-colour`}
           ></img>
@@ -102,9 +103,12 @@ export default function SignUp() {
               <LockOutlinedIcon />
             </Avatar> */}
           <Typography component="h1" variant="h5">
-            <div className="signUp__header">
-              <h1>Sign up Now!</h1>
+            <div className="register__header">
+              <h1>
+                New to <span style={{ color: "#FE6152" }}>YeetFlex?</span>
+              </h1>
             </div>
+            <h2>Sign up now!</h2>
           </Typography>
           <Box
             component="form"
@@ -188,7 +192,7 @@ export default function SignUp() {
                     alignItems: "center",
                   }}
                 >
-                  <p className="signUp__signin">
+                  <p className="register__signin">
                     Already have an account? Sign in!
                   </p>
                 </Link>
@@ -196,11 +200,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <div className="signUp__copyright">
-          <Copyright sx={{ mt: 5, color: "white" }} />
-        </div>
       </Container>
-      {/* </ThemeProvider> */}
     </div>
   );
 }

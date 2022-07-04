@@ -1,9 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,400;1,700&display=swap");
+
 $foreground: "#28353B";
 $background: "#FFFFFF";
 $icon: "#FE6152";
+
+$xs: 4px;
+$sm: 8px;
+$md: 16px;
+$lg: 24px;
+$xl: 32px;
+$xxl: 48px;
+$xxxl: 64px;
+$xxxxl: 80px;
 
 :export {
   $black: $foreground;
   $red: $icon;
   $white: $background;
+  $xs: $xs;
+  $sm: $sm;
+  $md: $md;
+  $lg: $lg;
+  $xl: $xl;
+  $xxl: $xxl;
 }

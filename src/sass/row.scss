@@ -1,10 +1,13 @@
 .row {
   color: #ffffff;
-  margin-left: 20px;
+  margin-left: 16px;
+  padding: 4px;
+  display: block;
 
   .row__title {
     text-align: left;
-    padding: 5px;
+    margin-left: 8px;
+    margin-top: 8px;
   }
 
   .row__titleLarge {
@@ -25,23 +28,24 @@
     .row__poster {
       object-fit: contain;
       width: 100%;
-      max-height: 150px;
-      margin-right: 10px;
-      margin-left: 5px;
-      transition: transform 450ms;
+      max-height: 144px;
+      margin-right: 16px;
+      transition: transform 400ms, border 400ms;
+      border: 2px solid #fe605200;
 
       &:hover {
         border: 2px solid #fe6152;
-        transform: scale(1.08);
+        transform: scale(1.04);
         opacity: 1;
+        padding: 0px;
       }
     }
     .row__posterLarge {
       object-fit: contain;
-      max-height: 250px;
+      max-height: 248px;
 
       &:hover {
-        transform: scale(1.09);
+        transform: scale(1.04);
         opacity: 1;
       }
     }
