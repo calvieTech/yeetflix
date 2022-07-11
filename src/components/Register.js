@@ -1,206 +1,95 @@
-import { useNavigate } from "react-router";
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import React, { useRef } from "react";
 import "../sass/register.scss";
-import image from "../media/yeetflex-nobackground.png";
+import { authMe } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { authMe } from "../firebase";
+import Nav from "./Nav";
+import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://cthang94.github.io/">
-        CalvieTech
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."} <br />
-      All Rights Reserved.
-    </Typography>
-  );
-}
-
-export default function Register() {
+function Register() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
-  // const [{ basket, user }, dispatch] = useStateValue();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const signUp = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(
+      authMe,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
+      .then((authUser) => {
+        navigate("/");
+        // console.log(authUser);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   const signIn = (e) => {
     e.preventDefault();
-
-    signInWithEmailAndPassword(authMe, email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate("/");
-        }
+    signInWithEmailAndPassword(
+      authMe,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
+      .then((authUser) => {
+        navigate("/");
+        // console.log(authUser);
       })
-      .catch((error) => alert(error.message));
-  };
-
-  const register = (e) => {
-    e.preventDefault();
-
-    createUserWithEmailAndPassword(authMe, email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate("/");
-        }
-      })
-      .catch((error) => alert(error.message));
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
-    <div className="register">
-      {/* <ThemeProvider theme={theme}> */}
-      <Container
-        className="register__container"
-        component="main"
-        maxWidth="xl"
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-        }}
-      >
-        <CssBaseline />
-        <Box>
-          <img
-            className="register__logo"
-            src={image}
-            alt={`yeetflex-colour`}
-          ></img>
-          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar> */}
-          <Typography component="h1" variant="h5">
-            <div className="register__header">
-              <h1>
-                New to <span style={{ color: "#FE6152" }}>YeetFlex?</span>
-              </h1>
-            </div>
-            <h2>Sign up now!</h2>
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{
-              padding: "30px",
-              marginTop: 3,
-              backgroundColor: "white",
-              color: "black",
-            }}
+    <>
+      <nav className="register__nav">
+        <Nav />
+      </nav>
+      <div className="register">
+        <form className="register__form">
+          <h1>Sign In</h1>
+          <input
+            ref={emailRef}
+            className="register__email"
+            placeholder="Email Address"
+            type="email"
+          />
+          <input
+            ref={passwordRef}
+            className="register__pw"
+            placeholder="Password"
+            type="password"
+          />
+          <button
+            className="register__formSubmit"
+            type="submit"
+            onClick={signIn}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive coding, software, tech news and latest software updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link
-                  href="#"
-                  variant="body2"
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <p className="register__signin">
-                    Already have an account? Sign in!
-                  </p>
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </div>
+            Sign In
+          </button>
+          <h4 className="register__signUp">
+            <span className="register__gray">New to YEETFLIX? </span>
+            <span className="register__link" onClick={signUp}>
+              Sign Up now!
+            </span>
+            <span className="register__notice">
+              NOTE: To sign up, you only need to type in your email address &
+              password and click the Sign Up link above
+            </span>
+          </h4>
+        </form>
+      </div>
+      <footer className="register__footer">
+        <Footer />
+      </footer>
+    </>
   );
 }
+
+export default Register;

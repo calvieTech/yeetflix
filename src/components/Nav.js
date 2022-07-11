@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import image from "../media/yeetflex-nobackground.png";
+import image from "../media/yeetflix-no-background.png";
 import "../sass/nav.scss";
 import { Link } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import MainMenu from "./MainMenu";
+import SearchBar from "./SearchBar";
 
 function Nav() {
   const [show, handleShow] = useState(false);
 
+  const transitionNavBar = () => {
+    if (window.scrollY > 100) {
+      handleShow(true);
+    } else {
+      handleShow(false);
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        handleShow(true);
-      } else {
-        handleShow(false);
-      }
-    });
+    window.addEventListener("scroll", transitionNavBar);
     return () => {
-      window.removeEventListener("scroll", () => {});
+      window.removeEventListener("scroll", transitionNavBar);
     };
   }, []);
   return (
-    <nav className={`nav ${show && "nav__black"}`}>
-      <Link to="/home">
+    <div className={`nav ${show && "nav__black"}`}>
+      <Link to="/">
         <img
           className="nav__logo"
           src={image}
@@ -31,9 +33,10 @@ function Nav() {
           height={40}
         />
       </Link>
+      <SearchBar className="nav__searchbar" />
       {/* <MainMenu className="nav__dashboard" /> */}
       <Dashboard className="nav__dashboard" />
-    </nav>
+    </div>
   );
 }
 

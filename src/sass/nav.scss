@@ -8,7 +8,7 @@
   padding: 24px;
   height: 40px;
   transition-timing-function: ease-in;
-  transition: all 0.3s;
+  transition: all 0.4s;
   // background-color: #111;
 
   .nav__logo {
@@ -19,8 +19,9 @@
     cursor: pointer;
     align-items: center;
   }
+
 }
 
 .nav__black {
-  background-color: black;
+  background-color: #0a090c;
 }

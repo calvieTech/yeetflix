@@ -4,9 +4,11 @@ import "../sass/dashboard.scss";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [open, setOpen] = useState(false);
+  const history = useNavigate();
 
   const handleClick = (event) => {
     setOpen(!open);
@@ -32,18 +34,15 @@ function Dashboard() {
         open={open}
         onClose={handleClose}
       >
-        <li className="dashboard__menuItem">
-          <a href="./login">Sign In</a>
-        </li>
-        <li className="dashboard__menuItem">
-          <a href="./register">Register</a>
-        </li>
-        <li className="dashboard__menuItem">
-          <a href="./profile">Profile</a>
-        </li>
-        <li className="dashboard__menuItem">
-          <a href="./register">Settings</a>
-        </li>
+        <Link to="/account" className="dashboard__menuItem">
+          My Account
+        </Link>
+        <Link to="/list" className="dashboard__menuItem">
+          My List
+        </Link>
+        <Link to="/register" className="dashboard__menuItem">
+          Sign In
+        </Link>
       </ul>
     </div>
   );

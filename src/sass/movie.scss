@@ -1,0 +1,30 @@
+.movie {
+  .movie__title {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .movie__name {
+      text-align: center;
+      font-size: 36px;
+    }
+
+    .movie__aired {
+      font-size: 24px;
+    }
+
+    .movie__rating {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .movie__content {
+      .movie__poster {
+        object-fit: contain;
+        max-width: 400px;
+        max-height: 400px;
+      }
+    }
+  }
+}

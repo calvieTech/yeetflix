@@ -14,12 +14,12 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     border: none;
     vertical-align: middle;
-    background-color: #ffffff;
+    background-color: #fe0039;
     transition: background-color 0.2ms ease-in, color 0.2ms ease-in;
     color: black;
 
     &.open {
-      background-color: #fe6152;
+      background-color: #fca311;
       color: white;
       transition: background-color 0.2ms ease-in-out, color 0.2ms ease-in-out;
     }
@@ -30,7 +30,7 @@
     list-style: none;
     visibility: hidden;
     opacity: 0;
-    transform: translateY(180px);
+    transform: translateY(144px);
     right: 40px;
     transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
     position: relative;
@@ -43,21 +43,20 @@
     }
 
     .dashboard__menuItem {
-      background-color: lightblue;
+      background-color: #f0edee;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
-
-      a {
-        padding: 24px 16px;
-        display: block;
-        text-align: center;
-        text-decoration: none;
-      }
+      padding: 16px 24px;
+      text-decoration: none;
+      text-align: center;
+      color: black;
+      transition: background-color 0.2s ease-in;
 
       &:hover {
-        background-color: antiquewhite;
+        color: #f0edee;
+        background-color: #fe0039;
       }
     }
   }

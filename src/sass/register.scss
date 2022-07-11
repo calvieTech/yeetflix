@@ -1,32 +1,74 @@
+@use "index.scss" as index;
+
 .register {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #28353b;
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  background: rgba(0, 0, 0, 0.85);
+  // background-color: #0a2342;
+  background-size: 100% 100%;
 
-  .register__container {
-    .register__logo {
-      margin-bottom: 50px;
+  .register__form {
+    max-width: 360px;
+    max-height: 720px;
+    padding: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(0, 0, 0, 0.85);
+    text-align: center;
+    display: grid;
+    flex-direction: column;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.85);
+
+    h1 {
+      font-weight: 400;
+      color: #fca311;
     }
 
-    .register__header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    [class^="register__"] {
+      outline-width: 0;
+      height: 40px;
+      margin-bottom: 16px;
+      border-radius: 5px;
+      border: none;
+      padding: 8px 16px;
     }
 
-    .register__copyright {
+    .register__formSubmit {
+      // padding: 16px 24px;
+      font-size: index.$md;
       color: white;
+      border-radius: 5px;
+      background-color: #fe0039;
+      font-weight: 600;
+      border: none;
+      margin-top: 8px;
+      cursor: pointer;
     }
 
-    .register__signin {
-      text-decoration: none;
+    .register__signUp {
+      font-size: index.$lg;
+      margin-top: 16px;
+      display: block;
+      font-size: index.$md;
+
+      .register__gray {
+        color: grey;
+      }
+
+      .register__link {
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+
+      .register__notice {
+        color: white;
+        margin-top: 16px;
+        display: block;
+      }
     }
   }
 }

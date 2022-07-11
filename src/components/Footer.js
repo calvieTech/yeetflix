@@ -13,7 +13,11 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://cthang94.github.io/">
+      <Link
+        color="#fca311"
+        sx={{ textDecoration: "none" }}
+        href="https://cthang94.github.io/"
+      >
         CalvieTech
       </Link>{" "}
       {new Date().getFullYear()}

@@ -2,19 +2,18 @@
 
 .footer {
   z-index: 1;
-  border-top: 1px solid rgba(white, 0.33);
+  border-top: 2px solid rgba(white, 0.33);
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  margin-top: size.$xxxl;
+  // margin-top: size.$xxxl;
   padding: size.$lg;
   height: 64px;
-  background-color: #2f4f4f;
-  color: white;
+  background-color: #0a090c;
   object-fit: contain;
 
   .footer__copyright {
+    color: #fca311;
     display: flex;
     flex-direction: column;
     justify-content: center;

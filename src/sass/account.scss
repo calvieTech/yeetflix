@@ -1,0 +1,64 @@
+.account {
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a2342;
+
+  .account__body {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    max-width: 800px;
+
+    .account__bodyTitle {
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+      border-bottom: 1px solid #282c2d;
+      margin-bottom: 24px;
+    }
+
+    .account__info {
+      display: flex;
+
+      .account__details {
+        color: white;
+        margin-left: 24px;
+        flex: 1;
+
+        .account__detailsEmail {
+          background-color: gray;
+          padding: 16px;
+          font-size: 16px;
+          padding-left: 24px;
+        }
+
+        .account__signOut {
+          padding: 8px 24px;
+          font-size: 16px;
+          margin-top: 4%;
+          width: 100%;
+          background-color: #fe0039;
+          cursor: pointer;
+          border: none;
+          color: white;
+          font-weight: 600;
+        }
+
+        .account__plans {
+          margin-top: 24px;
+          text-align: center;
+
+          .account__plansTitle {
+            padding-bottom: 8px;
+            border-bottom: 1px solid #282c2d;
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import { trackPromise } from "react-promise-tracker";
 import "../sass/banner.scss";
+import Typewriter from "typewriter-effect";
 
 function Banner({ fetchUrl, requests }) {
   const [movie, setMovie] = useState([]);
@@ -50,7 +51,15 @@ function Banner({ fetchUrl, requests }) {
         >
           <div className="banner__contents">
             <h1 className="banner__title">
-              {movie?.title || movie?.name || movie?.original_name}
+              <Typewriter
+                options={{
+                  strings: movie?.title || movie?.name || movie?.original_name,
+                  autoStart: true,
+                  loop: true,
+                  wrapperClassName: "banner__title",
+                  cursorClassName: "banner__titleCursor",
+                }}
+              />
             </h1>
 
             <div className="banner__buttons">

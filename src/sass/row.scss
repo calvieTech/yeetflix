@@ -5,6 +5,7 @@
   display: block;
 
   .row__title {
+    color: #fca311;
     text-align: left;
     margin-left: 8px;
     margin-top: 8px;
@@ -25,16 +26,51 @@
       display: none;
     }
 
+    &:hover {
+      .row__postersLeft {
+        opacity: 1;
+        display: flex;
+        align-self: center;
+        z-index: 1;
+      }
+
+      .row__postersRight {
+        opacity: 1;
+        display: flex;
+        align-self: center;
+        z-index: 1;
+      }
+    }
+    .row__postersLeft {
+      color: #fe0039;
+      display: none;
+      left: 24px;
+      position: absolute;
+      font-size: 56px;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    .row__postersRight {
+      color: #fe0039;
+      right: 24px;
+      position: absolute;
+      display: none;
+      font-size: 56px;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
     .row__poster {
       object-fit: contain;
       width: 100%;
       max-height: 144px;
-      margin-right: 16px;
+      margin-right: 8px;
       transition: transform 400ms, border 400ms;
       border: 2px solid #fe605200;
 
       &:hover {
-        border: 2px solid #fe6152;
+        border: 2px solid #fca311;
         transform: scale(1.04);
         opacity: 1;
         padding: 0px;

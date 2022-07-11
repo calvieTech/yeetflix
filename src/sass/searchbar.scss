@@ -1,0 +1,39 @@
+.searchbar {
+  position: fixed;
+  right: 128px;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  object-fit: contain;
+
+  .searchbar__box {
+    .searchbar__icon {
+      position: relative;
+      top: 8px;
+      padding-right: 4px;
+      padding-left: 4px;
+      cursor: pointer;
+    }
+
+    .searchbar__text {
+      font-weight: "Roboto";
+      border: none;
+      height: 40px;
+      padding-left: 8px;
+      width: 288px;
+      text-align: left;
+      background-color: rgba(128, 128, 128, 0.301);
+      color: white;
+      border-radius: 4px;
+      &::placeholder {
+        text-align: left;
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+      }
+    }
+  }
+  .searchbar__results {
+  }
+}
